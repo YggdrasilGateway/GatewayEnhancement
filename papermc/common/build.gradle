@@ -1,0 +1,18 @@
+plugins {
+    id 'java'
+}
+
+
+repositories {
+    maven {
+        url = uri("https://repo.papermc.io/repository/maven-public/")
+    }
+}
+
+dependencies {
+    compileOnly("org.bukkit:bukkit:1.12.2-R0.1-SNAPSHOT")
+}
+
+java {
+    sourceCompatibility = targetCompatibility = JavaVersion.VERSION_1_8
+}

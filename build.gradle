@@ -1,0 +1,21 @@
+plugins {
+    id("io.papermc.paperweight.userdev") version "1.7.1" apply false
+    id 'java-base'
+}
+
+tasks.register('jar', Jar).configure { Jar task ->
+    task.dependsOn(':papermc:jar')
+    task.dependsOn(':velocity:jar')
+
+    evaluationDependsOn(':papermc')
+    evaluationDependsOn(':velocity')
+
+    task.from(zipTree(project(':papermc').tasks.jar.outputs.files.singleFile))
+    task.from(zipTree(project(':velocity').tasks.jar.outputs.files.singleFile))
+
+    task.archiveBaseName.set('GatewayEnhancement')
+    task.manifest.attributes([
+            'paperweight-mappings-namespace': 'mojang+yarn'
+    ])
+}
+tasks.build.dependsOn('jar')

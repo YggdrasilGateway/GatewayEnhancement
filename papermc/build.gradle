@@ -1,0 +1,35 @@
+plugins {
+    id 'java-base'
+}
+
+subprojects {
+    if (name != 'common') {
+        pluginManager.withPlugin('java') {
+            dependencies.compileOnly(project(':papermc:common'))
+            if (project.name.startsWith('paper-') && project.name != 'paper-high-common') {
+                dependencies.compileOnly(project(':papermc:paper-high-common'))
+            }
+        }
+        pluginManager.withPlugin('io.papermc.paperweight.userdev') {
+            paperweight.reobfArtifactConfiguration = io.papermc.paperweight.userdev.ReobfArtifactConfiguration.Companion.MOJANG_PRODUCTION
+        }
+    }
+}
+
+tasks.register('jar', Jar.class).configure { Jar task ->
+    task.archiveBaseName.set('GatewayEnhancement')
+    task.manifest.attributes([
+            'paperweight-mappings-namespace': 'mojang+yarn'
+    ])
+//    task.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+}
+
+def usJar = tasks.jar
+tasks.build.dependsOn(usJar)
+
+subprojects {
+    pluginManager.withPlugin('java') {
+        usJar.dependsOn(tasks.jar)
+        usJar.from(zipTree(tasks.jar.outputs.files.singleFile))
+    }
+}

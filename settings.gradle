@@ -1,0 +1,7 @@
+include(':velocity')
+include(':papermc:common')
+//include(':papermc:paper-1.21')
+include(':papermc:paper-1.19')
+include(':papermc:paper-1.20')
+include(':papermc:paper-1.20.5')
+include(':papermc:paper-high-common')
