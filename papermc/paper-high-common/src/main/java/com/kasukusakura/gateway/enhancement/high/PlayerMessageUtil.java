@@ -15,8 +15,8 @@ public class PlayerMessageUtil {
         if (sender == null) return false;
 
 
-        var senderFrom = PropertyUtil.getValue(sender.getPlayerProfile(), "yggdrasil.gateway.source");
-        var meFrom = PropertyUtil.getValue(playerMe.getPlayerProfile(), "yggdrasil.gateway.source");
+        var senderFrom = PropertyUtil.getValue(sender.getPlayerProfile(), "gatewaySource");
+        var meFrom = PropertyUtil.getValue(playerMe.getPlayerProfile(), "gatewaySource");
 
         if (senderFrom == null || meFrom == null) return false;
 
