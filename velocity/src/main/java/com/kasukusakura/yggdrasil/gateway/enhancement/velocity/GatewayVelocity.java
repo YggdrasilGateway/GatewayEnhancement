@@ -1,9 +1,9 @@
 package com.kasukusakura.yggdrasil.gateway.enhancement.velocity;
 
+import com.kasukusakura.yggdrasil.gateway.enhancement.velocity.injection.PlayerOutgoingInjector;
 import com.velocitypowered.api.event.ResultedEvent;
 import com.velocitypowered.api.event.Subscribe;
 import com.velocitypowered.api.event.connection.LoginEvent;
-import com.velocitypowered.api.event.player.PlayerChatEvent;
 import com.velocitypowered.api.event.proxy.ProxyInitializeEvent;
 import com.velocitypowered.api.plugin.Plugin;
 import com.velocitypowered.api.proxy.Player;
@@ -39,13 +39,9 @@ public class GatewayVelocity {
         properties.stream().filter(it -> "rejection.reason".equals(it.getName())).findFirst().ifPresent(rejection -> {
             event.setResult(ResultedEvent.ComponentResult.denied(Component.text(rejection.getValue())));
         });
-    }
 
-    @Subscribe
-    private void onPlayerChat(PlayerChatEvent event) {
-//        ChatSession
+        PlayerOutgoingInjector.inject(event.getPlayer());
     }
-
 
     public static GameProfile.Property getPropertyValue(List<GameProfile.Property> properties, String key) {
         if (properties == null) return null;
