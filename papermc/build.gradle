@@ -27,6 +27,8 @@ tasks.register('jar', Jar.class).configure { Jar task ->
     task.manifest.attributes([
             'paperweight-mappings-namespace': 'mojang+yarn'
     ])
+    task.archiveClassifier.set('papermc')
+    task.destinationDirectory.set(rootProject.layout.buildDirectory.dir('libs'))
 //    task.duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 

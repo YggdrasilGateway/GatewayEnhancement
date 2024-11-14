@@ -1,6 +1,5 @@
 plugins {
     id 'java'
-    id 'com.github.johnrengelman.shadow' version '8.1.1'
 }
 
 java {
@@ -22,4 +21,8 @@ dependencies {
 }
 
 
-tasks.build.dependsOn(tasks.shadowJar)
+jar {
+    archiveBaseName.set('GatewayEnhancement')
+    archiveClassifier.set('velocity')
+    destinationDirectory.set(rootProject.layout.buildDirectory.dir('libs'))
+}
