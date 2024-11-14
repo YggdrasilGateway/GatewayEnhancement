@@ -16,9 +16,7 @@ public class GatewayEnhancement extends JavaPlugin {
 
         String subpoint = null;
 
-        if (bkVersion.startsWith("1.20.5") || bkVersion.startsWith("1.20.6")) {
-            subpoint = "v1_20_5";
-        } else if (bkVersion.startsWith("1.20.") || bkVersion.startsWith("1.20-")) {
+        if (bkVersion.startsWith("1.20.") || bkVersion.startsWith("1.20-")) {
             subpoint = "v1_20";
         } else if (bkVersion.startsWith("1.19.") || bkVersion.startsWith("1.19-")) {
             subpoint = "v1_19";

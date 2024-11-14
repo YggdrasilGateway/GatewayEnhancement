@@ -3,6 +3,12 @@ plugins {
 }
 
 subprojects {
+    repositories {
+        maven {
+            name = "papermc"
+            url = uri("https://repo.papermc.io/repository/maven-public/")
+        }
+    }
     if (name != 'common') {
         pluginManager.withPlugin('java') {
             dependencies.compileOnly(project(':papermc:common'))
